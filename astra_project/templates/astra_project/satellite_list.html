@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satellites of the Astra Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'astra_project/css/style.css' %}">
+</head>
+
+<body class="body-satellite-bg">
+    {% include 'astra_project/header.html' %}
+    <main class="container my-5">
+
+        <div class="container">
+            <h1 class="text-center mb-5 fw-bold">Спутники Солнечной Системы</h1>
+
+            <div class="row g-4">
+                {% for satellite in satellites %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card satellite-card p-3">
+                        <img src="{% if satellite.pictureUrl %}{% static 'images/' %}{{ satellite.pictureUrl }}{% else %}https://via.placeholder.com/400x300.png?text=No+Image{% endif %}" class="planet-img" alt="{{ satellite.name }}">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-3">{{ satellite.name }}</h3>
+                            <p class="card-text">{{ satellite.description|truncatewords:30 }}</p>
+                            <hr class="border-secondary">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="stat-label">Size (km)</span>
+                                <span class="stat-value">{{ satellite.size }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="stat-label">Distance (km)</span>
+                                <span class="stat-value">{{ satellite.distance }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="stat-label">Speed (km/s)</span>
+                                <span class="stat-value">{{ satellite.speed }}</span>
+                            </div>
+                            
+                            <!-- <div class="text-center mt-3">
+                                <a href="{% url 'satellite-update' satellite.id %}" class="btn-space btn-change me-2"><i
+                                        class="fas fa-edit me-2"></i>Change</a>
+                                <form method="post" action="{% url 'satellite-delete' satellite.id %}"
+                                    onsubmit="return confirm('Are you sure you want to delete this satellite?');" style="display: inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-space btn-delete"><i
+                                            class="fas fa-trash-alt me-2"></i>Delete</button>
+                                </form>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <div class="text-center p-5 bg-dark-card rounded-4">
+                        <h2 class="text-white">No satellites found.</h2>
+                        <p class="text-secondary">Why not be the first to add one?</p>
+                        <a href="{% url 'satellite-create' %}" class="btn btn-primary mt-3">Create Satellite</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    {% include 'astra_project/footer.html' %}
+ 
+</body>
+</html>
