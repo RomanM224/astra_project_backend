@@ -55,7 +55,7 @@
                 {% for planet in planets %}
                 <div class="col-lg-4 col-md-6">
                     <div class="card planet-card p-3">
-                        <img src="{% static 'images/' %}{{ planet.pictureUrl }}" class="planet-img" alt="Меркурий">
+                        <img src="{% static 'images/planets/' %}{{ planet.pictureUrl }}" class="planet-img" alt="Меркурий">
                         <div class="card-body">
                             <h3 class="card-title text-center mb-3">{{ planet.name }}</h3>
                             <p class="card-text">{{ planet.description|truncatewords:30 }}</p>
@@ -73,7 +73,7 @@
                                 <span class="stat-value">{{ planet.speed }}</span>
                             </div>
                             
-                             <div class="text-center">
+                             <!-- <div class="text-center">
                                 <a href="{% url 'planet-update' planet.id %}" class="btn-space btn-change me-2"><i
                                         class="fas fa-edit me-2"></i>Change</a>
                                 <form method="post" action="{% url 'planet-delete' planet.id %}"
@@ -82,7 +82,7 @@
                                     <button type="submit" class="btn-space btn-delete mt-2"><i
                                             class="fas fa-trash-alt me-2"></i>Delete</button>
                                 </form>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

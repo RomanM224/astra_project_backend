@@ -23,7 +23,7 @@
                 {% for satellite in satellites %}
                 <div class="col-lg-4 col-md-6">
                     <div class="card satellite-card p-3">
-                        <img src="{% if satellite.pictureUrl %}{% static 'images/' %}{{ satellite.pictureUrl }}{% else %}https://via.placeholder.com/400x300.png?text=No+Image{% endif %}" class="planet-img" alt="{{ satellite.name }}">
+                        <img src="{% if satellite.pictureUrl %}{% static 'images/satellites/' %}{{ satellite.pictureUrl }}{% else %}https://via.placeholder.com/400x300.png?text=No+Image{% endif %}" class="planet-img" alt="{{ satellite.name }}">
                         <div class="card-body">
                             <h3 class="card-title text-center mb-3">{{ satellite.name }}</h3>
                             <p class="card-text">{{ satellite.description|truncatewords:30 }}</p>

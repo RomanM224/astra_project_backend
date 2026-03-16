@@ -59,3 +59,33 @@ class Star(models.Model):
 
     def __str__(self):
         return self.name
+
+class PlanetSatelliteData(models.Model):
+    """
+    Represents the relationship between a Planet and a Satellite.
+    """
+    planetId = models.ForeignKey(Planet, on_delete=models.CASCADE)
+    satelliteId = models.ForeignKey(Satellite, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.planetId.name} - {self.satelliteId.name}"
+
+class StarPlanetData(models.Model):
+    """
+    Represents the relationship between a Star and a Planet.
+    """
+    starId = models.ForeignKey(Star, on_delete=models.CASCADE)
+    planetId = models.ForeignKey(Planet, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.starId.name} - {self.planetId.name}"
+
+class StarSystemStarData(models.Model):
+    """
+    Represents the relationship between a Star System and a Star.
+    """
+    starSystemId = models.ForeignKey(StarSystem, on_delete=models.CASCADE)
+    starId = models.ForeignKey(Star, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.starSystemId.name} - {self.starId.name}"

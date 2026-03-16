@@ -1,5 +1,5 @@
 from django import forms
-from .models import Planet, Satellite, Star, StarSystem
+from .models import Planet, Satellite, Star, StarSystem, PlanetSatelliteData, StarPlanetData, StarSystemStarData
 
 class PlanetForm(forms.ModelForm):
     """
@@ -19,6 +19,18 @@ class PlanetForm(forms.ModelForm):
             'position': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
+class PlanetSatelliteDataForm(forms.ModelForm):
+    """
+    Form class for creating relationships between Planets and Satellites.
+    """
+    class Meta:
+        model = PlanetSatelliteData
+        fields = ['planetId', 'satelliteId']
+        widgets = {
+            'planetId': forms.Select(attrs={'class': 'form-control'}),
+            'satelliteId': forms.Select(attrs={'class': 'form-control'}),
+        }
+
 class StarForm(forms.ModelForm):
     """
     Form class for creating and updating Star model instances.
@@ -35,6 +47,30 @@ class StarForm(forms.ModelForm):
             'pictureUrl': forms.TextInput(attrs={'class': 'form-control'}),
             'speed': forms.NumberInput(attrs={'class': 'form-control'}),
             'position': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+
+class StarPlanetDataForm(forms.ModelForm):
+    """
+    Form class for creating relationships between Stars and Planets.
+    """
+    class Meta:
+        model = StarPlanetData
+        fields = ['starId', 'planetId']
+        widgets = {
+            'starId': forms.Select(attrs={'class': 'form-control'}),
+            'planetId': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+class StarSystemStarDataForm(forms.ModelForm):
+    """
+    Form class for creating relationships between Star Systems and Stars.
+    """
+    class Meta:
+        model = StarSystemStarData
+        fields = ['starSystemId', 'starId']
+        widgets = {
+            'starSystemId': forms.Select(attrs={'class': 'form-control'}),
+            'starId': forms.Select(attrs={'class': 'form-control'}),
         }
 
 class StarSystemForm(forms.ModelForm):

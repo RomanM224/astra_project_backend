@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="{% static 'astra_project/css/style.css' %}">
 </head>
 
-<body class="body-planet-bg">
+<body class="body-star-bg">
     {% include 'astra_project/header.html' %}
 
     <main class="container my-5" >
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-12">
-                <div class="glassmorphism_form p-5 rounded-4 shadow" >
-                    <h1 class="text-center mb-4 text-orange_form">Create a New Star</h1>
+                <div class="glassmorphism_star_form p-5 rounded-4 shadow" >
+                    <h1 class="text-center mb-4 text-star_form">Create a New Star</h1>
                     <form method="post" class="mt-4">
                         {% csrf_token %}
                         {% if form_create_star.non_field_errors %}
@@ -58,7 +58,7 @@
                                     </div>
                                 {% endwith %}
                                 <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn custom-btn rounded-pill btn-lg save-planet-btn">Save Star</button>
+                            <button type="submit" class="btn  rounded-pill btn-lg save-star-btn">Save Star</button>
                             <a href="{% url 'star-list' %}" class="btn btn-outline-light rounded-pill mt-3">Back to Star List</a>
                         </div>
                             </div>

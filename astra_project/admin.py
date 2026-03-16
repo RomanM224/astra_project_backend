@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Planet, Satellite, Star, StarSystem
+from .models import Planet, Satellite, Star, StarSystem, PlanetSatelliteData
 
 @admin.register(Planet)
 class PlanetAdmin(admin.ModelAdmin):
@@ -36,3 +36,11 @@ class StarSystemAdmin(admin.ModelAdmin):
     list_display = ('name', 'distanceToUse')
     search_fields = ('name', 'description')
     list_filter = ('distanceToUse',)
+
+@admin.register(PlanetSatelliteData)
+class PlanetSatelliteDataAdmin(admin.ModelAdmin):
+    """
+    Customizes the display of the PlanetSatelliteData model.
+    """
+    list_display = ('planetId', 'satelliteId')
+    list_filter = ('planetId',)

@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Stars by Star System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'astra_project/css/style.css' %}">
+</head>
+
+<body class="body-star-bg">
+    {% include 'astra_project/header.html' %}
+
+    <main class="container my-5">
+        <!-- Form Section: Styled like create_planet.html -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 col-lg-12">
+                <div class="glassmorphism_form p-5 rounded-4 shadow">
+                    <h1 class="text-center mb-4 text-orange_form">Show Stars by Star System</h1>
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="star_system_select" class="form-label text-white">Select a Star System</label>
+                            <select name="star_system" id="star_system_select" class="form-control bg-dark text-white border-secondary">
+                                <option value="" selected disabled>Choose a star system...</option>
+                                {% for star_system in star_systems %}
+                                    <option value="{{ star_system.id }}" {% if selected_star_system and selected_star_system.id == star_system.id %}selected{% endif %}>{{ star_system.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn custom-btn rounded-pill btn-lg save-planet-btn">Show</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section: Styled like planet_list.html -->
+        {% if selected_star_system %}
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold text-white">Stars of {{ selected_star_system.name }}</h2>
+            
+            <div class="row g-4">
+                {% for star in stars %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card star-card p-3">
+                        <img src="{% if star.pictureUrl %}{% static 'images/stars/' %}{{ star.pictureUrl }}{% else %}https://via.placeholder.com/400x300.png?text=No+Image{% endif %}" class="planet-img" alt="{{ star.name }}">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-3">{{ star.name }}</h3>
+                            <p class="card-text">{{ star.description|truncatewords:30 }}</p>
+                            <hr class="border-secondary">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="stat-label">Size</span>
+                                <span class="stat-value">{{ star.size }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="stat-label">Distance</span>
+                                <span class="stat-value">{{ star.distance }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="stat-label">Speed</span>
+                                <span class="stat-value">{{ star.speed }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="text-center p-5 bg-dark-card rounded-4">
+                        <h2 class="text-white">No stars found for this star system.</h2>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </main>
+    {% include 'astra_project/footer.html' %}
+</body>
+</html>

@@ -20,6 +20,13 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+.body-star-bg {
+    background-image: url('../../images/star_bg.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
 
 .glassmorphism_menu {
     background: rgba(11, 11, 13, 0.9);
@@ -34,6 +41,21 @@ body {
     -webkit-backdrop-filter: blur(15px);
     box-shadow: 0 0 2px rgba(139, 69, 19, 0.8),
         0 0 5px rgba(240, 178, 48) inset !important;
+}
+.glassmorphism_satellite_form {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 0 2px rgba(1, 23, 65, 0.8),
+        0 0 5px rgb(4, 3, 96) inset !important;
+}
+
+.glassmorphism_star_form {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 0 2px rgba(28, 1, 65, 0.8),
+        0 0 5px rgb(4, 3, 96) inset !important;
 }
 
 
@@ -128,6 +150,41 @@ body {
     filter: drop-shadow(0 0 5px rgba(240, 178, 48, 0.3));
 }
 
+.text-satellite_form {
+    background: linear-gradient(90deg,
+            #12074f 0%,
+            #ffffff 50%,
+            #1f0788 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    display: inline-block;
+    width: 100%;
+    font-weight: 800;
+    text-transform: uppercase;
+
+    filter: drop-shadow(0 0 5px rgba(31, 3, 90, 0.3));
+}
+
+.text-star_form {
+    background: linear-gradient(90deg,
+            #20074f 0%,
+            #ffffff 50%,
+            #140557 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    display: inline-block;
+    width: 100%;
+    font-weight: 800;
+    text-transform: uppercase;
+
+    filter: drop-shadow(0 0 5px rgba(31, 3, 90, 0.3));
+}
 
 .custom-btn {
     border: 1px solid #ffa500;
@@ -213,7 +270,63 @@ body {
     box-shadow: 0 0 30px rgba(240, 178, 48, 0.7);
     transform: scale(1.02);
 }
+.save-satellite-btn {
+    background: linear-gradient(90deg,
+            #12074f 0%,
+            #2411b9 50%,
+            #1f0788 100%);
 
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(54, 15, 195, 0.2);
+    border-radius: 25px;
+    padding: 12px 30px;
+    cursor: pointer;
+
+    box-shadow: 0 0 20px rgba(48, 67, 240, 0.4);
+
+    transition: all 0.3s ease;
+}
+
+.save-satellite-btn:hover {
+    background: linear-gradient(90deg,
+           #12074f 0%,
+            #2411b9 50%,
+            #1f0788 100%);
+    box-shadow: 0 0 20px rgba(48, 67, 240, 0.7);
+    transform: scale(1.02);
+}
+
+.save-star-btn {
+    background: linear-gradient(90deg,
+            #20074f 0%,
+            #8c0faf 50%,
+            #140557 100%);
+
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(49, 10, 223, 0.2);
+    border-radius: 25px;
+    padding: 12px 30px;
+    cursor: pointer;
+
+    box-shadow: 0 0 20px rgba(48, 67, 240, 0.2);
+
+    transition: all 0.3s ease;
+}
+
+.save-star-btn:hover {
+    background: linear-gradient(90deg,
+           #20074f 0%,
+            #170530 50%,
+            #140557 100%);
+    box-shadow: 0 0 20px rgba(48, 67, 240, 0.7);
+    transform: scale(1.02);
+}
 .planet-card {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
@@ -246,6 +359,25 @@ body {
 }
 
 .satellite-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(248, 248, 248, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.star-card {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    /* border: 0px solid rgba(255, 255, 255, 0.1); */
+    box-shadow: 0 0 2px rgba(23, 126, 178, 0.8),
+        0 0 5px rgb(4, 3, 96) inset !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.star-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px rgba(248, 248, 248, 0.2);
     border-color: rgba(255, 255, 255, 0.5);

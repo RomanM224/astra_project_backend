@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'astra_project/css/style.css' %}">
 </head>
 
-<body class="body-planet-bg">
+<body class="body-star-bg">
     {% include 'astra_project/header.html' %}
     <main class="container my-5">
 
@@ -22,8 +22,8 @@
             <div class="row g-4">
                 {% for star_system in star_systems %}
                 <div class="col-lg-4 col-md-6">
-                    <div class="card planet-card p-3">
-                        <img src="{% if star_system.pictureUrl %}{% static 'images/' %}{{ star_system.pictureUrl }}{% else %}https://via.placeholder.com/400x300.png?text=No+Image{% endif %}" class="planet-img" alt="{{ star_system.name }}">
+                    <div class="card star-card p-3">
+                        <img src="{% if star_system.pictureUrl %}{% static 'images/star_systems/' %}{{ star_system.pictureUrl }}{% else %}https://via.placeholder.com/400x300.png?text=No+Image{% endif %}" class="planet-img" alt="{{ star_system.name }}">
                         <div class="card-body">
                             <h3 class="card-title text-center mb-3">{{ star_system.name }}</h3>
                             <p class="card-text">{{ star_system.description|truncatewords:30 }}</p>

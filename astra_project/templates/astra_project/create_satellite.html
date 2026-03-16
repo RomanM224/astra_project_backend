@@ -17,8 +17,8 @@
     <main class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-12">
-                <div class="glassmorphism_form p-5 rounded-4 shadow">
-                    <h1 class="text-center mb-4 text-orange_form">Create a New Satellite</h1>
+                <div class="glassmorphism_satellite_form p-5 rounded-4 shadow">
+                    <h1 class="text-center mb-4 text-satellite_form">Create a New Satellite</h1>
                     <form method="post" class="mt-4">
                         {% csrf_token %}
                         {% if form_create_satellite.non_field_errors %}
@@ -57,7 +57,7 @@
                                 </div>
                                 {% endwith %}
                                 <div class="d-grid gap-2 mt-4">
-                                    <button type="submit" class="btn custom-btn rounded-pill btn-lg save-planet-btn">Save Satellite</button>
+                                    <button type="submit" class="btn  rounded-pill btn-lg save-satellite-btn">Save Satellite</button>
                                     <a href="{% url 'satellite-list' %}" class="btn btn-outline-light rounded-pill mt-3">Back to Satellite List</a>
                                 </div>
                             </div>

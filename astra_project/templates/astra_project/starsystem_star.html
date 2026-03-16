@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Star to Star System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'astra_project/css/style.css' %}">
+</head>
+
+<body class="body-planet-bg">
+    {% include 'astra_project/header.html' %}
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="glassmorphism_form p-5 rounded-4 shadow">
+                    <h1 class="text-center mb-4 text-orange_form">Add Star to Star System</h1>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.starSystemId.id_for_label }}" class="form-label text-white">Star System</label>
+                            {{ form.starSystemId }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.starId.id_for_label }}" class="form-label text-white">Star</label>
+                            {{ form.starId }}
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn custom-btn rounded-pill btn-lg save-planet-btn">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'astra_project/footer.html' %}
+</body>
+</html>
