@@ -49,7 +49,7 @@
         </ul>  -->
 
         <div class="container">
-            <h1 class="text-center mb-5 fw-bold">Планеты Солнечной Системы</h1>
+            <h1 class="text-center mb-5 fw-bold">Planets</h1>
 
             <div class="row g-4">
                 {% for planet in planets %}
@@ -73,7 +73,7 @@
                                 <span class="stat-value">{{ planet.speed }}</span>
                             </div>
                             
-                             <!-- <div class="text-center">
+                            <!-- <div class="text-center">
                                 <a href="{% url 'planet-update' planet.id %}" class="btn-space btn-change me-2"><i
                                         class="fas fa-edit me-2"></i>Change</a>
                                 <form method="post" action="{% url 'planet-delete' planet.id %}"

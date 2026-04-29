@@ -33,7 +33,8 @@
                                 <span class="stat-value">{{ star_system.distanceToUse }} light-years</span>
                             </div>
                             
-                             <!-- <div class="text-center">
+                            <a href="{% url 'simulation' %}?system_id={{ star_system.id }}" class="btn-space btn-dive d-block mb-3"><i class="fas fa-rocket me-2"></i>Start diving</a>
+                            <!-- <div class="text-center">
                                 <a href="{% url 'star-system-update' star_system.id %}" class="btn-space btn-change me-2"><i
                                         class="fas fa-edit me-2"></i>Change</a>
                                 <form method="post" action="{% url 'star-system-delete' star_system.id %}"
@@ -42,7 +43,7 @@
                                     <button type="submit" class="btn-space btn-delete mt-2"><i
                                             class="fas fa-trash-alt me-2"></i>Delete</button>
                                 </form>
-                            </div> -->
+                            </div>  -->
                         </div>
                     </div>
                 </div>

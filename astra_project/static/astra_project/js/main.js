@@ -1,10 +1,10 @@
-
-import * as THREE from 'https://cdn.skypack.dev/three@0.132.2'; // Основная библиотека Three.js
-import { OrbitControls } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js'; // Управление камерой (вращение, масштабирование)
-import { EffectComposer } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/EffectComposer.js'; // Для создания цепочки эффектов постобработки
-import { RenderPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/RenderPass.js'; // Проход рендеринга, который рисует сцену
-import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/UnrealBloomPass.js'; // Эффект свечения (bloom)
-import { TWEEN } from 'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/jsm/libs/tween.module.min.js';
+import * as THREE from 'https://esm.sh/three@0.132.2';
+import { OrbitControls } from 'https://esm.sh/three@0.132.2/examples/jsm/controls/OrbitControls.js';
+import { EffectComposer } from 'https://esm.sh/three@0.132.2/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://esm.sh/three@0.132.2/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'https://esm.sh/three@0.132.2/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { TWEEN } from 'https://esm.sh/three@0.132.2/examples/jsm/libs/tween.module.min.js';
+const keyState = {};
 
 // --- Базовая настройка сцены ---
 const scene = new THREE.Scene(); // Создаем сцену, которая будет содержать все объекты
@@ -12,7 +12,8 @@ const scene = new THREE.Scene(); // Создаем сцену, которая б
 // --- Фон (Skybox) ---
 // Используем TextureLoader для загрузки изображения, которое будет служить фоном
 const textureLoader1 = new THREE.TextureLoader();
-const texture = textureLoader1.load("/static/images/simulation_bg2.png"); // Загружаем панораму Млечного Пути
+//const texture = textureLoader1.load("/static/images/textures/milky_way_panaram.jpg"); // Загружаем панораму Млечного Пути
+const texture = textureLoader1.load("/static/images/simulation_bg3.png"); // Загружаем панораму Млечного Пути
 
 scene.background = texture; // Устанавливаем загруженную текстуру как фон сцены
 // scene.background = new THREE.Color(0x999999); // Альтернативный вариант: сплошной тёмно-серый цвет
@@ -70,43 +71,23 @@ const planetsMap = new Map();
 const starsMap = new Map();
 const satellitesMap = new Map();
 
-const starData = [
-    { id: 1, name: 'Sun', description: 'This is Sun', size: 28.8, textureURL: '/static/images/textures/sunmap2.jpg', distance: 0, speed: 0, position: 0 }
-]
+// --- Fetch Data from Window (populated by Django) ---
+const starData = window.starData || [];
+const planetData = window.planetData || [];
+const satelliteData = window.satelliteData || [];
+const starPlanetData = window.starPlanetData || [];
+const planetSatelliteData = window.planetSatelliteData || [];
 
-// --- Данные о планетах ---
-const planetData = [
-    { id: 1, name: 'Mercury', description: 'The smallest planet in our solar system and nearest to the Sun.', size: 0.6, textureURL: '/static/images/textures/mercurymap.jpg', distance: 39, speed: 88, positionX: 45 },
-    { id: 2, name: 'Venus', description: 'The second planet from the Sun, known for its thick, toxic atmosphere.', size: 1.5, textureURL: '/static/images/textures/venusmap.jpg', distance: 72, speed: 224, positionX: 90 },
-    { id: 3, name: 'Earth', description: 'Our home planet, the only place known to harbor life.', size: 1.6, textureURL: '/static/images/textures/earthmap1k.jpg', distance: 100, speed: 365, positionX: 135 },
-    { id: 4, name: 'Mars', description: 'The "Red Planet," known for its reddish appearance and polar ice caps.', size: 0.8, textureURL: '/static/images/textures/mars_1k_color.jpg', distance: 150, speed: 687, positionX: 180 },
-    { id: 5, name: 'Jupiter', description: 'The largest planet in our solar system, a gas giant with a Great Red Spot.', size: 17.4, textureURL: '/static/images/textures/jupitermap.jpg', distance: 520, speed: 4333, positionX: 210 },
-    { id: 6, name: 'Saturn', description: 'Known for its extensive ring system, the second-largest planet.', size: 14.5, textureURL: '/static/images/textures/saturnmap.jpg', distance: 954, speed: 10759, positionX: 255 },
-    { id: 7, name: 'Uranus', description: 'An ice giant with a unique tilt, making it appear to rotate on its side.', size: 6.3, textureURL: '/static/images/textures/uranusmap.jpg', distance: 1919, speed: 30685, positionX: 45 },
-    { id: 8, name: 'Neptune', description: 'The most distant planet from the Sun, a dark, cold, and windy ice giant.', size: 6.1, textureURL: '/static/images/textures/neptunemap.jpg', distance: 3007, speed: 60190, positionX: 180 }
-];
 
-const satelliteData = [
-    { id: 1, name: 'Moon', description: 'Moon', size: 0.5, textureURL: '/static/images/textures/mercurymap.jpg', distance: 5, speed: 88, positionX: 45 }
-]
+// Fallback warning if data is missing
+if (starData.length === 0 && planetData.length === 0) {
 
-const starPlanetData = [
-    { starId: 1, planetId: 1 },
-    { starId: 1, planetId: 2 },
-    { starId: 1, planetId: 3 },
-    { starId: 1, planetId: 4 },
-    { starId: 1, planetId: 5 },
-    { starId: 1, planetId: 6 },
-    { starId: 1, planetId: 7 },
-    { starId: 1, planetId: 8 }
-]
-
-const planetSatelliteData = [
-    { planetId: 3, satelliteId: 1 }
-]
+    console.warn("No Solar System data found. Make sure window.starData and window.planetData are populated in the HTML template.");
+}
 
 // Создаем звёзды
 starData.forEach(data => {
+
     createStar(data.id, data.name, data.description, data.size, data.textureURL, data.distance, data.speed, data.position);
 });
 
@@ -114,6 +95,7 @@ let earth, saturn;
 
 // --- Создаем все планеты Солнечной системы ---
 planetData.forEach(data => {
+
     const planetObj = createPlanet(data.id, data.name, data.description, data.size, data.textureURL, data.distance, data.speed, data.positionX);
     if (data.name === 'Earth') {
         earth = planetObj;
@@ -125,47 +107,73 @@ planetData.forEach(data => {
 
 // Создаем спутники
 satelliteData.forEach(data => {
+
     createSatellite(data.id, data.name, data.description, data.size, data.textureURL, data.distance, data.speed, data.positionX)
 });
 
 // Связываем сзёзды с планетами
 starPlanetData.forEach(data => {
+
     let star = starsMap.get(data.starId);
     let planet = planetsMap.get(data.planetId);
-    star.add(planet[0]);
+    if (star && planet) {
+        star.add(planet[0]);
+    }
+
 })
 
 // Связываем планеты со спутниками
 planetSatelliteData.forEach(data => {
+
     let planet = planetsMap.get(data.planetId);
     let satellite = satellitesMap.get(data.satelliteId);
-    planet[1].add(satellite);
+    if (planet && satellite) {
+        planet[1].add(satellite);
+    }
 })
 
 // --- Солнце ---
 function createStar(id, name, description, size, textureURL, distance, speed, position) {
 
-    const geometry = new THREE.SphereGeometry(size, 32, 32); // Геометрия сферы для Солнца
+    let starSize = Number((size / 55700).toFixed(4));
+    if(starSize < 1){
+        starSize = 4;
+    }
+    const geometry = new THREE.SphereGeometry(starSize, 32, 32); // Геометрия сферы для Солнца
     // Используем MeshBasicMaterial, так как Солнце само является источником света и не требует внешнего освещения
     const material = new THREE.MeshBasicMaterial({
         map: textureLoader.load(textureURL) // Накладываем текстуру Солнца
     });
+
     const star = new THREE.Mesh(geometry, material);
     const starObj = new THREE.Object3D();
     star.name = name; // Присваиваем имя для идентификации при клике
     star.userData = { description }; // Сохраняем описание в userData
-
     starObj.add(star);
-    star.position.x = distance;
+    let starDistance
+    if (distance < 4000000000) {
+        starDistance = distance / 1500000;
+    } else {
+        starDistance = 4000;
+    }
+
+    star.position.x = starDistance;
     starObj.rotation.y = position;
+    const orbitGeometry = new THREE.RingGeometry(starDistance - 1, starDistance + 1, 512);
+    const orbitMaterial = new THREE.MeshBasicMaterial({ color: 0x999999, side: THREE.DoubleSide });
+    const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
+    orbit.rotation.x = -0.5 * Math.PI; // Поворачиваем орбиту, чтобы она была в плоскости XY
+    starObj.add(orbit);
     starsMap.set(id, star);
     scene.add(starObj); // Добавляем Солнце на сцену
     stars.push({ star, starObj, speed });
 }
 
+
 function createPlanet(id, name, description, size, textureURL, distance, speed, position) {
     // Создание геометрии и материала для планеты
-    const geometry = new THREE.SphereGeometry(size, 32, 32);
+    const planetSize = Number((size / 12700).toFixed(4));
+    const geometry = new THREE.SphereGeometry(planetSize, 32, 32);
     const material = new THREE.MeshStandardMaterial({ // MeshStandardMaterial реагирует на свет
         map: textureLoader.load(textureURL)
     });
@@ -177,13 +185,34 @@ function createPlanet(id, name, description, size, textureURL, distance, speed, 
     // Сама планета будет дочерним элементом этого объекта.
     const planetObj = new THREE.Object3D();
     planetObj.add(planet);
-    //sun.add(planetObj);
 
     // Устанавливаем начальное положение планеты на ее орбите
-    planet.position.x = distance;
+    // let planetDistance = distance / 1500000;
+    let a = 1000000;
+    let b = 500000;
+
+    while(a < distance){
+        a = a + 5000000;
+        b = b + 1200;
+    }
+    console.log(b);
+    let planetDistance = distance / b;
+    let starSize = 0;
+    
+    // Устанавливаем начальное положение планеты на ее орбите
+    starPlanetData.forEach(data => {
+        if (data.planetId == id) {
+            let star = starsMap.get(data.starId);
+            console.log(star);
+            starSize = star.geometry.parameters.radius;
+        }
+
+    })
+    planetDistance = planetDistance + starSize;
+    planet.position.x = planetDistance;
     planetObj.rotation.y = position;
     // Создание видимой орбиты в виде тонкого кольца
-    const orbitGeometry = new THREE.RingGeometry(distance - 0.1, distance + 0.1, 512);
+    const orbitGeometry = new THREE.RingGeometry(planetDistance - 0.1, planetDistance + 0.1, 512);
     const orbitMaterial = new THREE.MeshBasicMaterial({ color: 0x999999, side: THREE.DoubleSide });
     const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
     orbit.rotation.x = -0.5 * Math.PI; // Поворачиваем орбиту, чтобы она была в плоскости XY
@@ -199,7 +228,8 @@ function createPlanet(id, name, description, size, textureURL, distance, speed, 
 
 function createSatellite(id, name, description, size, textureURL, distance, speed, position) {
     // Создание геометрии и материала для планеты
-    const geometry = new THREE.SphereGeometry(size, 32, 32);
+    const satelliteSize = Number((size / 12700).toFixed(4));
+    const geometry = new THREE.SphereGeometry(satelliteSize, 32, 32);
     const material = new THREE.MeshStandardMaterial({ // MeshStandardMaterial реагирует на свет
         map: textureLoader.load(textureURL)
     });
@@ -212,11 +242,22 @@ function createSatellite(id, name, description, size, textureURL, distance, spee
     const satelliteObj = new THREE.Object3D();
     satelliteObj.add(satellite);
 
+    let planetSize = 0;
     // Устанавливаем начальное положение планеты на ее орбите
-    satellite.position.x = distance;
+    planetSatelliteData.forEach(data => {
+        if (data.satelliteId == id) {
+            let planet = planetsMap.get(data.planetId);
+            planetSize = planet[1].geometry.parameters.radius;
+        }
+
+    })
+    var satelliteDistance = distance / 400000;
+    satelliteDistance = satelliteDistance + planetSize;
+
+    satellite.position.x = satelliteDistance;
     satelliteObj.rotation.y = position;
     // Создание видимой орбиты в виде тонкого кольца
-    const orbitGeometry = new THREE.RingGeometry(distance - 0.1, distance + 0.1, 512);
+    const orbitGeometry = new THREE.RingGeometry(satelliteDistance - 0.1, satelliteDistance + 0.1, 512);
     const orbitMaterial = new THREE.MeshBasicMaterial({ color: 0x999999, side: THREE.DoubleSide });
     const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
     orbit.rotation.x = -0.5 * Math.PI; // Поворачиваем орбиту, чтобы она была в плоскости XY
@@ -241,15 +282,26 @@ if (saturn) {
 
 // --- Создание кнопок для планет ---
 const planetButtonsContainer = document.getElementById('planet-buttons');
-planets.forEach(({ planet }) => {
-    const button = document.createElement('button');
-    button.textContent = planet.name;
-    button.addEventListener('click', () => {
-        // Имитируем клик по планете
-        handlePlanetClick(planet);
+if (planetButtonsContainer) {
+    planets.forEach(({ planet }) => {
+        const button = document.createElement('button');
+        button.textContent = planet.name;
+        button.addEventListener('click', () => {
+            // Имитируем клик по планете
+            handlePlanetClick(planet);
+        });
+        planetButtonsContainer.appendChild(button);
     });
-    planetButtonsContainer.appendChild(button);
-});
+    stars.forEach(({ star }) => {
+        const button = document.createElement('button');
+        button.textContent = star.name;
+        button.addEventListener('click', () => {
+            // Имитируем клик по планете
+            handlePlanetClick(star);
+        });
+        planetButtonsContainer.appendChild(button);
+    });
+}
 
 let targetPlanet = null; // Переменная для отслеживания выбранной планеты
 
@@ -262,6 +314,24 @@ function animate() {
     TWEEN.update(); // Обновляем анимации TWEEN
 
     const delta = clock.getDelta(); // Получаем время с прошлого кадра
+
+    // --- Camera Movement Controls ---
+    const moveSpeed = 100.0; // Adjust for desired speed
+    // Only allow free-fly camera movement when not focused on a planet
+    if (targetPlanet === null) {
+        if (keyState['w']) {
+            camera.translateZ(-moveSpeed * delta);
+        }
+        if (keyState['s']) {
+            camera.translateZ(moveSpeed * delta);
+        }
+        if (keyState['a']) {
+            camera.translateX(-moveSpeed * delta);
+        }
+        if (keyState['d']) {
+            camera.translateX(moveSpeed * delta);
+        }
+    }
 
     satellites.forEach(s => {
         if (s.speed == 0) {
@@ -319,15 +389,70 @@ window.addEventListener('resize', () => {
     composer.setSize(width, height);
 });
 
+// --- Keyboard controls for camera movement ---
+window.addEventListener('keydown', (event) => {
+    keyState[event.key.toLowerCase()] = true;
+});
+
+window.addEventListener('keyup', (event) => {
+    keyState[event.key.toLowerCase()] = false;
+});
+
+
 // --- Raycasting для выбора планеты кликом ---
 const raycaster = new THREE.Raycaster(); // Создает "луч" из камеры в точку клика
 const mouse = new THREE.Vector2();     // Вектор для хранения координат мыши
 
-// Получаем доступ к элементам информационной панели из HTML
-const infoPanel = document.getElementById('info-panel');
-const planetName = document.getElementById('planet-name');
-const planetDescription = document.getElementById('planet-description');
-const closeBtn = document.getElementById('close-btn');
+// --- UI Creation (Dynamic) ---
+// Проверяем, существует ли панель, если нет — создаем её динамически
+let infoPanel = document.getElementById('info-panel');
+let planetName = document.getElementById('planet-name');
+let planetDescription = document.getElementById('planet-description');
+let closeBtn = document.getElementById('close-btn');
+
+if (!infoPanel) {
+    infoPanel = document.createElement('div');
+    infoPanel.id = 'info-panel';
+    // Стили для позиционирования в нижнем левом углу
+    Object.assign(infoPanel.style, {
+        position: 'absolute',
+        bottom: '00px',
+        top: 'auto',
+        left: '200px',
+        width: '300px',
+        padding: '20px',
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        color: 'white',
+        borderRadius: '10px',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
+        display: 'none', // Скрыто по умолчанию
+        zIndex: '1000',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        backdropFilter: 'blur(5px)'
+    });
+
+    infoPanel.innerHTML = `
+        <h2 id="planet-name" style="margin: 0 0 10px 0; font-size: 1.5rem; color: #ffffff;">Planet Name</h2>
+        <p id="planet-description" style="font-size: 0.95rem; line-height: 1.5; color: #ddd;"></p>
+        <button id="close-btn" style="
+            margin-top: 5px;
+            padding: 8px 16px;
+            background: linear-gradient(to right, #fbca37 0%, #a28305 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        ">Close</button>
+    `;
+
+    document.body.appendChild(infoPanel);
+
+    // Обновляем ссылки на элементы
+    planetName = document.getElementById('planet-name');
+    planetDescription = document.getElementById('planet-description');
+    closeBtn = document.getElementById('close-btn');
+}
 
 // Обработчик для кнопки закрытия информационной панели
 closeBtn.addEventListener('click', () => {
@@ -377,8 +502,8 @@ function handlePlanetClick(selectedPlanet) {
 
 // Обработчик клика мыши по всему окну
 window.addEventListener('click', (event) => {
-    // Игнорируем клик, если клик был по навигации или кнопке закрытия
-    if (event.target.closest('nav') || event.target.closest('#close-btn') || event.target.closest('#planet-buttons')) {
+    // Игнорируем клик, если клик был по навигации, инфо-панели или кнопкам
+    if (event.target.closest('nav') || event.target.closest('#info-panel') || event.target.closest('#planet-buttons')) {
         return;
     }
 

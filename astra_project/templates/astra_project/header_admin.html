@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-orange" href="{% url 'landing-page' %}">
+            <i class="fas fa-rocket me-2"></i>Astra Admin
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="adminNavbar">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'planet-list-admin' %}">Planets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'star-list-admin' %}">Stars</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'satellite-list-admin' %}">Satellites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'star-system-list-admin' %}">Systems</a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            Create New
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="{% url 'planet-create' %}">Planet</a></li>
+                            <li><a class="dropdown-item" href="{% url 'star-create' %}">Star</a></li>
+                            <li><a class="dropdown-item" href="{% url 'satellite-create' %}">Satellite</a></li>
+                            <li><a class="dropdown-item" href="{% url 'star-system-create' %}">Star System</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

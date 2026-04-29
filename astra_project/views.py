@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from .models import Planet, Satellite, Star, StarSystem, PlanetSatelliteData, StarPlanetData, StarSystemStarData
 from .forms import PlanetForm, SatelliteForm, StarForm, StarSystemForm, PlanetSatelliteDataForm, StarPlanetDataForm, StarSystemStarDataForm
+import json
 
 def landing_page(request):
     """
@@ -285,4 +286,66 @@ def get_stars_by_starsystem(request):
     return render(request, 'astra_project/get_star_by_starsystem.html', {'star_systems': star_systems, 'stars': stars, 'selected_star_system': selected_star_system})
 
 def simulation(request):
-    return render(request, 'astra_project/simulationtest.html')
+    # Check if a specific star system was requested via URL parameters
+    system_id = request.GET.get('system_id')
+    
+    if system_id:
+        solar_system = StarSystem.objects.filter(pk=system_id).first()
+    else:
+        # Fallback: Fetch the default Solar System if no ID is provided
+        solar_system = StarSystem.objects.filter(name__icontains="The Solar System").first()
+
+    if solar_system:
+        # Get stars related to the Solar System
+        star_ids = StarSystemStarData.objects.filter(starSystemId=solar_system).values_list('starId', flat=True)
+        stars = Star.objects.filter(id__in=star_ids)
+
+        # Get planets related to these stars
+        star_planet_qs = StarPlanetData.objects.filter(starId__in=stars)
+        planet_ids = star_planet_qs.values_list('planetId', flat=True)
+        planets = Planet.objects.filter(id__in=planet_ids)
+
+        # Get satellites related to these planets
+        planet_sat_qs = PlanetSatelliteData.objects.filter(planetId__in=planets)
+        satellite_ids = planet_sat_qs.values_list('satelliteId', flat=True)
+        satellites = Satellite.objects.filter(id__in=satellite_ids)
+
+        # Get relationship data for filtered objects
+        star_planet_rels = list(star_planet_qs.values('starId', 'planetId'))
+        planet_sat_rels = list(planet_sat_qs.values('planetId', 'satelliteId'))
+    else:
+        stars = Star.objects.none()
+        planets = Planet.objects.none()
+        satellites = Satellite.objects.none()
+        star_planet_rels = []
+        planet_sat_rels = []
+
+    # Helper to construct image paths (assuming textureUrl stores filename like 'mars.jpg')
+    # and mapping model fields to the structure expected by main.js
+    star_list = [{
+        'id': s.id, 'name': s.name, 'description': s.description, 'size': s.size,
+        'textureURL': f'/static/images/textures/{s.textureUrl}' if s.textureUrl else '',
+        'distance': s.distance, 'speed': s.speed, 'position': s.position
+    } for s in stars]
+
+    planet_list = [{
+        'id': p.id, 'name': p.name, 'description': p.description, 'size': p.size,
+        'textureURL': f'/static/images/textures/{p.textureUrl}' if p.textureUrl else '',
+        'distance': p.distance, 'speed': p.speed, 'positionX': p.position 
+    } for p in planets]
+
+    satellite_list = [{
+        'id': s.id, 'name': s.name, 'description': s.description, 'size': s.size,
+        'textureURL': f'/static/images/textures/{s.textureUrl}' if s.textureUrl else '',
+        'distance': s.distance, 'speed': s.speed, 'positionX': s.position 
+    } for s in satellites]
+
+
+    context = {
+        'star_data_json': json.dumps(star_list),
+        'planet_data_json': json.dumps(planet_list),
+        'satellite_data_json': json.dumps(satellite_list),
+        'star_planet_data_json': json.dumps(star_planet_rels),
+        'planet_satellite_data_json': json.dumps(planet_sat_rels),
+    }
+    return render(request, 'astra_project/simulation.html', context)
