@@ -68,19 +68,6 @@
         </div>
     </main>
     {% include 'astra_project/footer.html' %}
-    <script>
-        // Add Bootstrap classes to form fields dynamically
-        document.addEventListener('DOMContentLoaded', function () {
-            var inputs = document.querySelectorAll('form input, form select, form textarea');
-            inputs.forEach(function (input) {
-                if (input.type === 'checkbox' || input.type === 'radio') {
-                    input.classList.add('form-check-input');
-                } else {
-                    input.classList.add('form-control', 'bg-dark', 'text-white', 'border-secondary');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

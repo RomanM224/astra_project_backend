@@ -100,11 +100,6 @@
 <body>
     {% include 'astra_project/header.html' %}
     <div id="planet-buttons"></div>
-    <!-- <div id="info-panel">
-        <span id="close-btn">✖</span>
-        <h2 id="planet-name"></h2>
-        <p id="planet-description"></p>
-    </div> -->
     <script>
         window.starData = {{ star_data_json|safe }};
         window.planetData = {{ planet_data_json|safe }};
@@ -112,7 +107,7 @@
         window.starPlanetData = {{ star_planet_data_json|safe }};
         window.planetSatelliteData = {{ planet_satellite_data_json|safe }};
     </script>
-    <script type="module" src="{% static 'astra_project/js/main.js' %}"></script>
+    <script type="module" src="{% static 'astra_project/js/simulation.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

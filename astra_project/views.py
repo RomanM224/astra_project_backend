@@ -219,7 +219,6 @@ def get_satellites_by_planet(request):
         planet_id = request.POST.get('planet')
         if planet_id:
             selected_planet = get_object_or_404(Planet, pk=planet_id)
-            # Fetch satellites linked to this planet via the PlanetSatelliteData join table
             relations = PlanetSatelliteData.objects.filter(planetId=selected_planet)
             satellites = [relation.satelliteId for relation in relations]
 
@@ -321,7 +320,7 @@ def simulation(request):
         planet_sat_rels = []
 
     # Helper to construct image paths (assuming textureUrl stores filename like 'mars.jpg')
-    # and mapping model fields to the structure expected by main.js
+    # and mapping model fields to the structure expected by simulation.js
     star_list = [{
         'id': s.id, 'name': s.name, 'description': s.description, 'size': s.size,
         'textureURL': f'/static/images/textures/{s.textureUrl}' if s.textureUrl else '',
@@ -339,7 +338,6 @@ def simulation(request):
         'textureURL': f'/static/images/textures/{s.textureUrl}' if s.textureUrl else '',
         'distance': s.distance, 'speed': s.speed, 'positionX': s.position 
     } for s in satellites]
-
 
     context = {
         'star_data_json': json.dumps(star_list),

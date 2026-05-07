@@ -16,7 +16,6 @@
     {% include 'astra_project/header.html' %}
 
     <main class="container my-5">
-        <!-- Form Section: Styled like create_planet.html -->
         <div class="row justify-content-center mb-5">
             <div class="col-md-8 col-lg-12">
                 <div class="glassmorphism_form p-5 rounded-4 shadow">
@@ -40,7 +39,6 @@
             </div>
         </div>
 
-        <!-- Results Section: Styled like satellite_list.html -->
         {% if selected_planet %}
         <div class="container">
             <h2 class="text-center mb-5 fw-bold text-white">Satellites of {{ selected_planet.name }}</h2>

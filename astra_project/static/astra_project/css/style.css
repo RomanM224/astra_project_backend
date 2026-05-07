@@ -1,11 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
 body {
     font-family: 'Arial', sans-serif;
     background-color: #0B0B0D;
-
 }
-
 .body-planet-bg {
     background-image: url('../../images/planet_bg.png');
     background-repeat: no-repeat;
@@ -34,7 +31,6 @@ body {
     -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .glassmorphism_form {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
@@ -49,7 +45,6 @@ body {
     box-shadow: 0 0 2px rgba(1, 23, 65, 0.8),
         0 0 5px rgb(4, 3, 96) inset !important;
 }
-
 .glassmorphism_star_form {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
@@ -57,135 +52,104 @@ body {
     box-shadow: 0 0 2px rgba(28, 1, 65, 0.8),
         0 0 5px rgb(4, 3, 96) inset !important;
 }
-
-
 .space-btn {
     background-color: #1a1f26;
     border: 2px solid #ffa500;
     border-radius: 30px;
-
-    /* Текст */
     color: #ffffff;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1px;
     text-decoration: none;
-
     padding: 15px 35px;
     font-size: 16px;
-
     box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-
     transition: all 0.3s ease;
     cursor: pointer;
     display: inline-block;
 }
-
 .space-btn:hover {
     background-color: #252a33;
     box-shadow: 0 0 20px rgba(255, 165, 0, 0.8),
         0 0 10px #ffa50066 inset;
     transform: translateY(-2px);
 }
-
 .space-btn:active {
     transform: translateY(1px);
     box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
 }
-
 .menu_btn:hover {
     color: #ffa500 !important;
     transform: translateY(-2px);
 }
-
 .menu_btn:active {
     transform: translateY(1px);
 }
-
-
 .bg-dark-card {
     background-color: #0a0a0a !important;
     border: 1px solid rgb(255, 165, 0) !important;
     box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
 }
-
 .card-img-top {
     height: 180px;
     object-fit: cover;
 }
-
 .text-orange {
     background: linear-gradient(90deg,
             rgb(139, 69, 19) 0%,
             rgb(240, 178, 48) 50%,
             #8b4513 100%);
-
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     display: inline-block;
     width: 100%;
     font-weight: 800;
     text-transform: uppercase;
-
     filter: drop-shadow(0 0 5px rgba(240, 178, 48, 0.3));
 }
-
 .text-orange_form {
     background: linear-gradient(90deg,
             #8b4513 0%,
             #f0b230 50%,
             #8b4513 100%);
-
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     display: inline-block;
     width: 100%;
     font-weight: 800;
     text-transform: uppercase;
-
     filter: drop-shadow(0 0 5px rgba(240, 178, 48, 0.3));
 }
-
 .text-satellite_form {
     background: linear-gradient(90deg,
             #12074f 0%,
             #ffffff 50%,
             #1f0788 100%);
-
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     display: inline-block;
     width: 100%;
     font-weight: 800;
     text-transform: uppercase;
-
     filter: drop-shadow(0 0 5px rgba(31, 3, 90, 0.3));
 }
-
 .text-star_form {
     background: linear-gradient(90deg,
             #20074f 0%,
             #ffffff 50%,
             #140557 100%);
-
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     display: inline-block;
     width: 100%;
     font-weight: 800;
     text-transform: uppercase;
-
     filter: drop-shadow(0 0 5px rgba(31, 3, 90, 0.3));
 }
-
 .custom-btn {
     border: 1px solid #ffa500;
     color: #ffa500;
@@ -193,28 +157,23 @@ body {
     transition: all 0.3s ease;
     padding: 6px 20px;
 }
-
 .custom-btn:hover {
     background-color: #ffa500;
     color: white;
     border-color: #ffa500;
 }
-
 .custom-control {
     width: auto;
     top: 50%;
     transform: translateY(-50%);
     opacity: 1;
 }
-
 .carousel-control-prev.custom-control {
     left: 10px;
 }
-
 .carousel-control-next.custom-control {
     right: 10px;
 }
-
 .custom-arrow {
     display: flex;
     align-items: center;
@@ -228,26 +187,21 @@ body {
     font-size: 1.3rem;
     transition: background-color 0.3s ease;
 }
-
 .custom-arrow:hover {
     background-color: #ffa500;
     color: white;
 }
-
 @media (max-width: 767.98px) {
-
     .row.g-4 {
         justify-content: center;
     }
 }
-
 .save-planet-btn {
     background: linear-gradient(90deg,
             #8b4513 0%,
             #f0b230 50%,
             #8b4513 100%
         );
-
     color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
@@ -256,12 +210,9 @@ body {
     border-radius: 25px;
     padding: 12px 30px;
     cursor: pointer;
-
     box-shadow: 0 0 20px rgba(240, 178, 48, 0.4);
-
     transition: all 0.3s ease;
 }
-
 .save-planet-btn:hover {
     background: linear-gradient(90deg,
             #a0522d 0%,
@@ -275,7 +226,6 @@ body {
             #12074f 0%,
             #2411b9 50%,
             #1f0788 100%);
-
     color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
@@ -284,12 +234,9 @@ body {
     border-radius: 25px;
     padding: 12px 30px;
     cursor: pointer;
-
     box-shadow: 0 0 20px rgba(48, 67, 240, 0.4);
-
     transition: all 0.3s ease;
 }
-
 .save-satellite-btn:hover {
     background: linear-gradient(90deg,
            #12074f 0%,
@@ -298,13 +245,11 @@ body {
     box-shadow: 0 0 20px rgba(48, 67, 240, 0.7);
     transform: scale(1.02);
 }
-
 .save-star-btn {
     background: linear-gradient(90deg,
             #20074f 0%,
             #8c0faf 50%,
             #140557 100%);
-
     color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
@@ -313,12 +258,9 @@ body {
     border-radius: 25px;
     padding: 12px 30px;
     cursor: pointer;
-
     box-shadow: 0 0 20px rgba(48, 67, 240, 0.2);
-
     transition: all 0.3s ease;
 }
-
 .save-star-btn:hover {
     background: linear-gradient(90deg,
            #20074f 0%,
@@ -338,18 +280,15 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
 }
-
 .planet-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px rgba(228, 191, 5, 0.2);
     border-color: rgba(220, 231, 14, 0.5);
 }
-
 .satellite-card {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    /* border: 0px solid rgba(255, 255, 255, 0.1); */
     box-shadow: 0 0 2px rgba(1, 23, 65, 0.8),
         0 0 5px rgb(4, 3, 96) inset !important;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -357,18 +296,15 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
 }
-
 .satellite-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px rgba(248, 248, 248, 0.2);
     border-color: rgba(255, 255, 255, 0.5);
 }
-
 .star-card {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    /* border: 0px solid rgba(255, 255, 255, 0.1); */
     box-shadow: 0 0 2px rgba(23, 126, 178, 0.8),
         0 0 5px rgb(4, 3, 96) inset !important;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -376,13 +312,11 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     height: 100%;
 }
-
 .star-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px rgba(248, 248, 248, 0.2);
     border-color: rgba(255, 255, 255, 0.5);
 }
-
 .planet-img {
     width: 300px;
     height: 300px;
@@ -391,18 +325,15 @@ body {
     display: block;
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
 }
-
 .stat-label {
     color: rgb(163, 163, 163);
     font-size: 0.9rem;
     font-weight: bold;
 }
-
 .stat-value {
     color: rgb(163, 163, 163);
     font-size: 0.9rem;
 }
-
 .btn-space {
     display: flex;
     align-items: center;
@@ -422,49 +353,39 @@ body {
     overflow: hidden;
     box-sizing: border-box;
   }
-
   .btn-space i {
     margin-right: 8px;
     font-size: 16px;
   }
-
   .btn-space:focus {
     outline: none;
   }
-
   .btn-change {
     border-color: #0088cc;
     box-shadow: 0 0 10px rgba(0, 136, 204, 0.3);
   }
-
   .btn-change i {
     color: #00c3ff;
   }
-
   .btn-change:hover {
     background-color: rgba(0, 136, 204, 0.9);
     box-shadow: 0 0 20px rgba(0, 136, 204, 0.8);
   }
-
   .btn-change:active {
     background-color: rgba(0, 102, 153, 1);
     transform: translateY(1px);
   }
-
   .btn-delete {
     border-color: #cc0000;
     box-shadow: 0 0 10px rgba(204, 0, 0, 0.3);
   }
-
   .btn-delete i {
     color: #ff3333;
   }
-
   .btn-delete:hover {
     background-color: rgba(204, 0, 0, 0.9);
     box-shadow: 0 0 20px rgba(204, 0, 0, 0.8);
   }
-
   .btn-delete:active {
     background-color: rgba(153, 0, 0, 1);
     transform: translateY(1px);

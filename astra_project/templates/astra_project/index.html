@@ -13,9 +13,7 @@
 </head>
 
 <body>
-
-    <!-- Navigation -->
-     {% include 'astra_project/header.html' %}
+     {% include 'astra_project/header_admin.html' %}
     <header style="height: 900px; background-image: url('{% static 'images/header_home.png' %}'); background-repeat: no-repeat; background-size: cover; background-position: center; box-shadow: inset 0 0 200px rgba(0,0,0,0.9);">
 
         
@@ -33,8 +31,7 @@
             </div>
         </div>
     </header>
-
-    <!-- Main Content -->
+    
     <main class="container-fluid">
 
         <div class="container my-5">
@@ -46,51 +43,34 @@
                             <div class="row g-5 px-5">
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="card h-100 bg-dark-card border-0 rounded-4 p-3">
-                                        <img src="{% static 'images/solar_system.png' %}"
+                                        <img src="{% static 'images/star_systems/solar_system.png' %}"
                                             class="card-img-top rounded-4 object-fit-cover" alt="Systra System">
                                         <div class="card-body p-0 pt-3">
-                                            <h5 class="card-title text-orange fs-4">Systra System</h5>
-                                            <p class="card-text text-secondary">Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.
-                                            Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess</p>
-                                            <a href="#" class="btn custom-btn rounded-pill mt-2">Read more</a>
+                                            <h5 class="card-title text-orange fs-4">The Solar System</h5>
+                                            <p class="card-text text-secondary">The Solar System is a gravitationally bound system that formed about 4.6 billion years ago from a giant interstellar molecular cloud.</p>
+                                            <a href="{% url 'simulation' %}?system_id={{ 1 }}" class="btn custom-btn rounded-pill mt-2"><i class="fas fa-rocket me-2"></i>Start diving</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="card h-100 bg-dark-card border-0 rounded-4 p-3">
-                                        <img src="{% static 'images/alpha_centauri.png' %}"
+                                        <img src="{% static 'images/star_systems/alpha_centauri.png' %}"
                                             class="card-img-top rounded-4 object-fit-cover" alt="TRAPPIST-1 System">
                                         <div class="card-body p-0 pt-3">
-                                            <h5 class="card-title text-orange fs-4">TRAPPIST-1 System</h5>
-                                            <p class="card-text text-secondary">Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.</p>
-                                            <a href="#" class="btn custom-btn rounded-pill mt-2">Read more</a>
+                                            <h5 class="card-title text-orange fs-4">Alpha Centauri</h5>
+                                            <p class="card-text text-secondary">Alpha Centauri is the closest star system to us, located at a distance of approximately 4.37 light years from the Sun.</p>
+                                            <a href="{% url 'simulation' %}?system_id={{ 2 }}" class="btn custom-btn rounded-pill mt-2"><i class="fas fa-rocket me-2"></i>Start diving</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 col-12 d-md-block d-none">
                                     <div class="card h-100 bg-dark-card border-0 rounded-4 p-3">
-                                        <img src="{% static 'images/barnard_system.png' %}"
+                                        <img src="{% static 'images/star_systems/barnard_system.png' %}"
                                             class="card-img-top rounded-4 object-fit-cover" alt="Alpha Centaurui">
                                         <div class="card-body p-0 pt-3">
-                                            <h5 class="card-title text-orange fs-4">Alpha Centaurui</h5>
-                                            <p class="card-text text-secondary">Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess</p>
-                                            <a href="#" class="btn custom-btn rounded-pill mt-2">Read more</a>
+                                            <h5 class="card-title text-orange fs-4">Barnard's Star System</h5>
+                                            <p class="card-text text-secondary">Barnard's Star is a solitary star system located in the constellation Ophiuchus, approximately 6 light-years from Earth.</p>
+                                            <a href="{% url 'simulation' %}?system_id={{ 3 }}" class="btn custom-btn rounded-pill mt-2"><i class="fas fa-rocket me-2"></i>Start diving</a>
                                         </div>
                                     </div>
                                 </div>
@@ -101,40 +81,34 @@
                             <div class="row g-5 px-5">
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="card h-100 bg-dark-card border-0 rounded-4 p-3">
-                                        <img src="{% static 'images/wolf359_system.png' %}"
-                                            class="card-img-top rounded-4 object-fit-cover" alt="TRAPPIST-1 System">
+                                        <img src="{% static 'images/star_systems/solar_system.png' %}"
+                                            class="card-img-top rounded-4 object-fit-cover" alt="Systra System">
                                         <div class="card-body p-0 pt-3">
-                                            <h5 class="card-title text-orange fs-4">TRAPPIST-1 System</h5>
-                                            <p class="card-text text-secondary">Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess</p>
-                                            <a href="#" class="btn custom-btn rounded-pill mt-2">Read more</a>
+                                            <h5 class="card-title text-orange fs-4">The Solar System</h5>
+                                            <p class="card-text text-secondary">The Solar System is a gravitationally bound system that formed about 4.6 billion years ago from a giant interstellar molecular cloud.</p>
+                                            <a href="{% url 'simulation' %}?system_id={{ 1 }}" class="btn custom-btn rounded-pill mt-2"><i class="fas fa-rocket me-2"></i>Start diving</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="card h-100 bg-dark-card border-0 rounded-4 p-3">
-                                        <img src="{% static 'images/solar_system.png' %}"
-                                            class="card-img-top rounded-4 object-fit-cover" alt="Alpha Centaurui">
+                                        <img src="{% static 'images/star_systems/alpha_centauri.png' %}"
+                                            class="card-img-top rounded-4 object-fit-cover" alt="TRAPPIST-1 System">
                                         <div class="card-body p-0 pt-3">
-                                            <h5 class="card-title text-orange fs-4">Alpha Centaurui</h5>
-                                            <p class="card-text text-secondary">Lorum ane duy sup-tui. Suintecta molusia
-                                                ayntess.</p>
-                                            <a href="#" class="btn custom-btn rounded-pill mt-2">Read more</a>
+                                            <h5 class="card-title text-orange fs-4">Alpha Centauri</h5>
+                                            <p class="card-text text-secondary">Alpha Centauri is the closest star system to us, located at a distance of approximately 4.37 light years from the Sun.</p>
+                                            <a href="{% url 'simulation' %}?system_id={{ 2 }}" class="btn custom-btn rounded-pill mt-2"><i class="fas fa-rocket me-2"></i>Start diving</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 col-12 d-md-block d-none">
                                     <div class="card h-100 bg-dark-card border-0 rounded-4 p-3">
-                                        <img src="{% static 'images/barnard_system.png' %}"
-                                            class="card-img-top rounded-4 object-fit-cover" alt="Kepler-186f">
+                                        <img src="{% static 'images/star_systems/barnard_system.png' %}"
+                                            class="card-img-top rounded-4 object-fit-cover" alt="Alpha Centaurui">
                                         <div class="card-body p-0 pt-3">
-                                            <h5 class="card-title text-orange fs-4">Kepler-186f System</h5>
-                                            <p class="card-text text-secondary">Keaper ane doy sup-tui. Suintecta
-                                                molusia ayntess.</p>
-                                            <a href="#" class="btn custom-btn rounded-pill mt-2">Read more</a>
+                                            <h5 class="card-title text-orange fs-4">Barnard's Star System</h5>
+                                            <p class="card-text text-secondary">Barnard's Star is a solitary star system located in the constellation Ophiuchus, approximately 6 light-years from Earth.</p>
+                                            <a href="{% url 'simulation' %}?system_id={{ 3 }}" class="btn custom-btn rounded-pill mt-2"><i class="fas fa-rocket me-2"></i>Start diving</a>
                                         </div>
                                     </div>
                                 </div>
@@ -155,15 +129,8 @@
                 </div>
             </div>
         </div>
-
-
-
     </main>
-
-    <!-- Footer -->
     {% include 'astra_project/footer.html' %}
-
-    
 </body>
 
 </html>

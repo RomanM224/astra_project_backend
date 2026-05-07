@@ -1,38 +1,64 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary sticky-top">
-    <div class="container">
-        <a class="navbar-brand fw-bold text-orange" href="{% url 'landing-page' %}">
-            <i class="fas fa-rocket me-2"></i>Astra Admin
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark-transparent glassmorphism_menu">
+    <div class="container-fluid" style="padding-left: 170px; padding-right: 160px;">
+        <a class="navbar-brand" href="{% url 'landing-page' %}"><img src="{% static 'images/logo.png' %}"
+                alt="Astra Project" height="60"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="adminNavbar">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'planet-list-admin' %}">Planets</a>
+                
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="planetsDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Planets
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="planetsDropdown">
+                        <li><a class="dropdown-item" href="{% url 'planet-list' %}">Planet List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'planet-create' %}">Create Planet</a></li>
+                        <li><a class="dropdown-item" href="{% url 'planet-satellite-create' %}">Add Satellite to
+                                Planet</a></li>
+                        <li><a class="dropdown-item" href="{% url 'get-satellite-by-planet' %}">Show Satellite by
+                                planet</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'star-list-admin' %}">Stars</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="satellitesDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Satellites
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="satellitesDropdown">
+                        <li><a class="dropdown-item" href="{% url 'satellite-list' %}">Satellite List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'satellite-create' %}">Create Satellite</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'satellite-list-admin' %}">Satellites</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="starsDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Stars
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="starsDropdown">
+                        <li><a class="dropdown-item" href="{% url 'star-list' %}">Star List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'star-create' %}">Create Star</a></li>
+                        <li><a class="dropdown-item" href="{% url 'star-planet-create' %}">Add Planet to Star</a></li>
+                        <li><a class="dropdown-item" href="{% url 'get-planet-by-star' %}">Show Planet by Star</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'star-system-list-admin' %}">Systems</a>
-                </li>
-                <li class="nav-item ms-lg-3">
-                    <div class="dropdown">
-                        <button class="btn btn-outline-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            Create New
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="{% url 'planet-create' %}">Planet</a></li>
-                            <li><a class="dropdown-item" href="{% url 'star-create' %}">Star</a></li>
-                            <li><a class="dropdown-item" href="{% url 'satellite-create' %}">Satellite</a></li>
-                            <li><a class="dropdown-item" href="{% url 'star-system-create' %}">Star System</a></li>
-                        </ul>
-                    </div>
-                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="starSystemsDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Star System
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="starSystemsDropdown">
+                        <li><a class="dropdown-item" href="{% url 'star-system-list' %}">Star System List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'star-system-create' %}">Create Star System</a></li>
+                        <li><a class="dropdown-item" href="{% url 'star-system-star-create' %}">Add Star to Star
+                                System</a></li>
+                        <li><a class="dropdown-item" href="{% url 'get-star-by-starsystem' %}">Show Star by Star System</a></li>
+                    </ul>
+                </li> 
             </ul>
         </div>
     </div>

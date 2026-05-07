@@ -28,6 +28,7 @@ class PlanetAdmin(admin.ModelAdmin):
     list_filter = ('size', 'distance')
     inlines = [PlanetSatelliteInline]
 
+
     def picture_preview(self, obj):
         if obj.pictureUrl:
             # Displaying a small thumbnail in the list view
